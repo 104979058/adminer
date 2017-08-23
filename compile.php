@@ -223,7 +223,12 @@ function php_shrink($input) {
 	$output = '';
 	$in_echo = false;
 	$doc_comment = false; // include only first /**
-	for (reset($tokens); list($i, $token) = each($tokens); ) {
+	
+	// php 7.2.0 beta3 
+	// Type: E_DEPRECATED[8192]
+        // Mess: The each() function is deprecated. This message will be suppressed on further calls
+	
+	for (reset($tokens); list($i, $token) = each($tokens); ) {   // php 7.2.0 beta 3
 		if (!is_array($token)) {
 			$token = array(0, $token);
 		}
