@@ -167,7 +167,11 @@ if (!$error && $_POST) {
 								}
 
 								$start = microtime(true);
-							} while ($connection->next_result());
+							// https://stackoverflow.com/questions/33220075/why-this-php-error-occurs-strict-standards-mysqlinext-result-there-is-no	
+							// mysqli::next_result(): There is no next result set. Please, call mysqli_more	
+							//} while ($connection->next_result());
+							} while ($connection->more_results() && $connection->next_result());
+							
 						}
 
 						$query = substr($query, $offset);
